@@ -17,13 +17,31 @@
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-  </main>
+  <div style="display: flex;" class="text-center">
+    <main class="form-signin" style="margin: auto; padding: 50px">
+      <form>
+        <img class="mb-4" src="img/login.png" alt="" width="300">
+        <h1 class="h3" style="">Inicio de sesión</h1>
+      
+        <label>Email</label>
+        <div>
+          <input type="email" class="form-control" id="floatingInput" placeholder="Email">
+        </div>
+
+        <label>Contraseña</label>
+        <div>
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+        </div>
+      
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Recuérdame
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit">Ingresar</button>
+      </form>
+    </main>
+  </div>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -38,3 +56,6 @@
 </body>
 
 </html>
+
+
+
