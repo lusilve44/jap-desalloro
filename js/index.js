@@ -1,5 +1,5 @@
 if (sessionStorage.getItem('status') == null) {
-    location.href = "../proyecto-desarrollo-web-jap/login.html";
+    location.href = "../login.html";
 }
 
 document.addEventListener("DOMContentLoaded", function(){
