@@ -1,3 +1,7 @@
+if (sessionStorage.getItem('status') == null) {
+    location.href = "../proyecto-desarrollo-web-jap/login.html";
+}
+
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);

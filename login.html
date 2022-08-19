@@ -20,25 +20,28 @@
   <div style="display: flex;" class="text-center">
     <main class="form-signin" style="margin: auto; padding: 50px">
       <form>
+        
         <img class="mb-4" src="img/login.png" alt="" width="300">
         <h1 class="h3" style="">Inicio de sesión</h1>
-      
+
         <label>Email</label>
         <div>
           <input type="email" class="form-control" id="floatingInput" placeholder="Email">
+          <div class="invalid-feedback">
+            Ingresa tu e-mail
+          </div>
         </div>
 
         <label>Contraseña</label>
         <div>
           <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
-        </div>
-      
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Recuérdame
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary" type="submit">Ingresar</button>
+          <div class="invalid-feedback">
+            Ingresa tu contraseña
+          </div>
+        </div> 
+
+        <button class="btn btn-lg btn-primary" type="submit" id="ingresar" style="margin: 20px;">Ingresar</button>
+
       </form>
     </main>
   </div>
@@ -53,9 +56,7 @@
     </div>
   </footer>
   <script src="js/login.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
 
 </html>
-
-
-
