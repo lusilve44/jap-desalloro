@@ -13,6 +13,6 @@ btn.addEventListener('click', function(event){
         sessionStorage.setItem('currentloggedin_email', email.value);
         sessionStorage.setItem('currentloggedin_pwrd', pwrd.value);
         sessionStorage.setItem('status','loggedIn')
-        location.href = "{{site.baseurl}}/index.html";
+        location.href = "./index.html";
     }
 })
