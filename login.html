@@ -51,7 +51,9 @@
           window.onload = function () {
             google.accounts.id.initialize({
               client_id: "533221345910-b6nits7vr99aughm2gp48qoek9ilq86a.apps.googleusercontent.com",
-              callback: handleCredentialResponse
+              callback: handleCredentialResponse,
+              scope: 'email',
+              ux_mode: 'redirect'
             });
             google.accounts.id.renderButton(
               document.getElementById("buttonDiv"),
