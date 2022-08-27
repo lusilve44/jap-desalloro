@@ -21,7 +21,6 @@ btn.addEventListener('click', function(event){
     }
     else {
         sessionStorage.setItem('currentloggedin_email', email.value);
-        sessionStorage.setItem('currentloggedin_pwrd', pwrd.value); // not necessary
         sessionStorage.setItem('status','loggedIn')
         location.href = "./index.html";
     }
