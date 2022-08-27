@@ -1,14 +1,16 @@
-url = 'https://japceibal.github.io/emercado-api/cats_products/101.json';
+url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem('catID')}.json`;
+
+let user = document.getElementById("user-name");
+user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch(url).then(response => response.json()).then(data => {
         let main_html = document.getElementsByTagName('main')[0];
-        main_html.innerHTML = `
+        main_html.children[0].innerHTML = `
         <div class="text-center p-4">
             <h2>Productos</h2>
             <p class="lead">Verás aquí todos los productos de la categoría ${data.catName}</p>
-        </div>
-        ` + main_html.innerHTML;
+        </div>`;
         
         list_products = data.products;
         let html_content = '';
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             `;
         }
-        document.getElementsByTagName('main')[0].children[1].innerHTML = html_content;
+        main_html.children[2].innerHTML = html_content;
         // Se accede al tag <div class = 'container'>, ya que el primer hijo del tag name es 
         // el div donde se encuentra el titulo
     })

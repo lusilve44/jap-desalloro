@@ -2,6 +2,9 @@ if (sessionStorage.getItem('status') == null) {
     location.href = "./login.html";
 }
 
+let user = document.getElementById("user-name");
+user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
+
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
