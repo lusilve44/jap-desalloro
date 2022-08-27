@@ -11,8 +11,7 @@ user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
 
 function sortProducts(criteria, array){
     let result = [];
-    if (criteria === ORDER_ASC_BY_PRICE)
-    {
+    if (criteria === ORDER_ASC_BY_PRICE){
         result = array.sort(function(a, b) {
             if ( a.cost < b.cost ){ return -1; }
             if ( a.cost > b.cost ){ return 1; }

@@ -1,5 +1,9 @@
 let btn = document.getElementById('ingresar');
 
+if (sessionStorage.getItem('status') == 'loggedIn') {
+    location.href = "./index.html";
+}
+
 btn.addEventListener('click', function(event){
     let email = document.getElementById('floatingInput');
     let pwrd = document.getElementById('floatingPassword');
