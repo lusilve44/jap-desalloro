@@ -50,7 +50,7 @@ function showProductsList(){
         let product = currentProductsArray[i];
 
         if (((minPrice == undefined) || (minPrice != undefined && parseInt(product.cost) >= minPrice)) &&
-            ((maxPrice == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxPrice))){
+            ((maxPrice == undefined) || (maxPrice != undefined && parseInt(product.cost) <= maxPrice))){
 
             htmlContentToAppend += `
             <div onclick="setProdID(${product.id}) class="list-group-item list-group-item-action cursor-active">
