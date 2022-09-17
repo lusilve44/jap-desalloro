@@ -4,7 +4,7 @@ let productComments;
 let user = document.getElementById("user-name");
 user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
 
-function showImages(){
+function showImages(){ // mas adelante arreglar display de imagenes
     let images = productInfo.images;
     let list = document.getElementById("images");
     let htmlContentToAppend = ``;
@@ -61,8 +61,8 @@ function showComments(){
             </div>
         `;
     }
-    comments.innerHTML += htmlContentToAppend;
-}
+    comments.innerHTML = htmlContentToAppend;
+};
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL + `${localStorage.getItem('prodID')}` + EXT_TYPE).then(function(resultObj){
@@ -74,16 +74,42 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 
-    getJSONData(PRODUCT_INFO_COMMENTS_URL + `${localStorage.getItem('prodID')}` + EXT_TYPE).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            productComments = resultObj.data;
-            console.log(productComments);
-            showComments();
-        }
-    });
+    if (localStorage.getItem('comments of ' + `${localStorage.getItem('prodID')}`) == null){
+        getJSONData(PRODUCT_INFO_COMMENTS_URL + `${localStorage.getItem('prodID')}` + EXT_TYPE).then(function(resultObj){
+            if (resultObj.status === "ok"){
+                productComments = resultObj.data;
+                productComments.sort(function (a, b){
+                    let dateA = new Date(a.dateTime);
+                    let dateB = new Date(b.dateTime);
+                    return dateB - dateA
+                });
+                console.log(productComments);
+                localStorage.setItem('comments of ' + `${localStorage.getItem('prodID')}`,JSON.stringify(productComments));
+                showComments();
+            }
+        });
+    } else{
+        productComments = JSON.parse(localStorage.getItem('comments of ' + `${localStorage.getItem('prodID')}`));
+        console.log(productComments);
+        showComments();
+    }
+
 });
 
 document.getElementById("enviar").addEventListener("click", ()=>{
-    document.getElementById("opinion").value = '';
-    document.getElementById("puntacion").selectedIndex = 0;
+    if ((document.getElementById("opinion").value != '') & (document.getElementById("puntacion").selectedIndex != 0)){
+        let fecha = new Date(Date.now());
+        let comment = {
+            dateTime: fecha.toLocaleString("sv-SE"),
+            description: document.getElementById("opinion").value,
+            product: localStorage.getItem('prodID'),
+            score: document.getElementById("puntacion").selectedIndex,
+            user: sessionStorage.getItem('currentloggedin_email')
+        };
+        productComments.unshift(comment);
+        localStorage.setItem('comments of ' + `${localStorage.getItem('prodID')}`,JSON.stringify(productComments));
+        showComments();
+        document.getElementById("opinion").value = '';
+        document.getElementById("puntacion").selectedIndex = 0;
+    }
 });
