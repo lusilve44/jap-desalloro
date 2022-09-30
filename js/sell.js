@@ -9,8 +9,7 @@ let PESO_SYMBOL = "UYU ";
 let PERCENTAGE_SYMBOL = '%';
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
-let user = document.getElementById("user-name");
-user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
+navbarConfig();
 
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts(){

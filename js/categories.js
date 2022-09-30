@@ -6,8 +6,7 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
-let user = document.getElementById("user-name");
-user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
+navbarConfig();
 
 function sortCategories(criteria, array){
     let result = [];

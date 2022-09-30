@@ -1,8 +1,7 @@
 let productInfo;
 let productComments;
 
-let user = document.getElementById("user-name");
-user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
+navbarConfig();
 
 function showImages(){ // mas adelante arreglar display de imagenes
     let images = productInfo.images;

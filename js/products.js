@@ -6,8 +6,7 @@ let currentSortCriteria = undefined;
 let minPrice = undefined;
 let maxPrice = undefined;
 
-let user = document.getElementById("user-name");
-user.innerHTML = `${sessionStorage.getItem('currentloggedin_email')}`;
+navbarConfig();
 
 function sortProducts(criteria, array){
     let result = [];
