@@ -2,6 +2,7 @@ const ORDER_ASC_BY_PRICE = "min_max$";
 const ORDER_DESC_BY_PRICE = "max_min$";
 const ORDER_BY_RELEVANCE = "sold_amount";
 let currentProductsArray = [];
+let initialProductsArray = [];
 let currentSortCriteria = undefined;
 let minPrice = undefined;
 let maxPrice = undefined;
@@ -82,11 +83,15 @@ function sortAndShowProducts(sortCriteria, productsArray){
     showProductsList();
 }
 
+localStorage.setItem('sortAsc','false');
+localStorage.setItem('sortDesc','false');
+localStorage.setItem('sortByCount','false');
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL + `${localStorage.getItem('catID')}` + EXT_TYPE).then(function(resultObj){
         if (resultObj.status === "ok"){
-            currentProductsArray = resultObj.data.products;
+            initialProductsArray = resultObj.data.products;
+            currentProductsArray = JSON.parse(JSON.stringify(initialProductsArray));
             showProductsList();
         }
 
@@ -97,17 +102,40 @@ document.addEventListener("DOMContentLoaded", function(e){
         </div>`;
     });
 
-    
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_ASC_BY_PRICE);
+        if (localStorage.getItem('sortAsc') == 'false'){
+            sortAndShowProducts(ORDER_ASC_BY_PRICE);
+            localStorage.setItem('sortAsc','true');
+        }
+        else{
+            currentProductsArray = JSON.parse(JSON.stringify(initialProductsArray));
+            showProductsList();
+            localStorage.setItem('sortAsc','false');
+        }
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_DESC_BY_PRICE);
+        if (localStorage.getItem('sortDesc') == 'false'){
+            sortAndShowProducts(ORDER_DESC_BY_PRICE);
+            localStorage.setItem('sortDesc','true');
+        }
+        else{
+            currentProductsArray = JSON.parse(JSON.stringify(initialProductsArray));
+            showProductsList();
+            localStorage.setItem('sortDesc','false');
+        }
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_BY_RELEVANCE);
+        if (localStorage.getItem('sortByCount') == 'false'){
+            sortAndShowProducts(ORDER_BY_RELEVANCE);
+            localStorage.setItem('sortByCount','true');
+        }
+        else{
+            currentProductsArray = JSON.parse(JSON.stringify(initialProductsArray));
+            showProductsList();
+            localStorage.setItem('sortByCount','false');
+        }
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){

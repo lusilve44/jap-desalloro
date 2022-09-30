@@ -74,4 +74,10 @@ let navbarConfig = function(){
         </div>
       </div>
   `;
+
+  document.getElementById('logout').addEventListener('click', ()=>{
+    sessionStorage.removeItem('currentloggedin_email');
+    sessionStorage.setItem('status','loggedOut');
+    location.href = "./login.html";
+  })
 }

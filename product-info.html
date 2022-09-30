@@ -19,14 +19,23 @@
   <main class="pb-5 container">
 
     <div class="container row p-5">
-      <!-- class="single_product" -->
-      <div class="col-5">
-        <div class="container-fluid"> 
-          <ul class="list-unstyled" id="images">
-          </ul>
+      <div class="col-6">
+        <div class="container my-5"> 
+          <div id="carouselImages" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="indicators"></div>
+            <div class="carousel-inner" id="images"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="col-7" id="prodInfo"></div>
+      <div class="col-6" id="prodInfo"></div>
     </div>
 
     <div class="container row p-5" >
@@ -38,7 +47,7 @@
         <h3 class="fw-bold py-1">Deja tu comentario</h3>
         <form>
           <p class="py-2">Tu opinión:</p>
-          <textarea required  name="opinion" id="opinion" rows="4" columns="70" style="resize: both; width: 90%;"></textarea>
+          <textarea required  name="opinion" id="opinion" rows="4" columns="70" style="resize: none; width: 100%;"></textarea>
           <p class="pt-4">Tu puntación:</p>
           <select required name="puntacion" id="puntacion">
             <option selected disabled hidden value="0">--Elige una opción--</option>
@@ -53,6 +62,11 @@
           </div>
         </form>
       </div>
+    </div>
+    <div class="container row p-5">
+      <hr>
+      <h3 class="fw-bold py-2">Productos relacionados</h3>
+      <div class="row" id="relatedProds"></div>
     </div>
     
   </main>

@@ -3,16 +3,43 @@ let productComments;
 
 navbarConfig();
 
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
+
 function showImages(){ // mas adelante arreglar display de imagenes
     let images = productInfo.images;
-    let list = document.getElementById("images");
-    let htmlContentToAppend = ``;
+    let displayIndicators = document.getElementById('indicators');
+    let displayImages = document.getElementById("images");
+    let htmlToAppendIndicators = ``;
+    let htmlToAppendImages = ``;
+    let count = 0;
     for (let image of images){
-        htmlContentToAppend += `
-            <li><img class="img-thumbnail" src=${image}></li>
-        `;
+        if (count == 0){
+            htmlToAppendIndicators += `
+            <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="${count}" class="active" aria-current="true" aria-label="Slide ${count + 1}"></button>
+            `;
+            htmlToAppendImages += `
+            <div class="carousel-item active">
+                <img src="${image}" class="d-block w-100" alt="${productInfo.name}">
+            </div>
+            `;
+            count += 1;
+        } else {
+            htmlToAppendIndicators += `
+            <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="${count}" aria-label="Slide ${count + 1}"></button>
+            `;
+            htmlToAppendImages += `
+            <div class="carousel-item">
+                <img src="${image}" class="d-block w-100" alt="${productInfo.name}">
+            </div>
+            `;
+            count += 1;  
+        }
     }
-    list.innerHTML = htmlContentToAppend;
+    displayIndicators.innerHTML = htmlToAppendIndicators;
+    displayImages.innerHTML = htmlToAppendImages;
 };
 
 function showProductInfo(){
@@ -32,6 +59,20 @@ function showProductInfo(){
         </div>
     `;
     info.innerHTML = htmlContentToAppend;
+
+    let relatedProds = document.getElementById('relatedProds');
+    let moreHtmlToAppend = ``;
+    for (let product of productInfo.relatedProducts){
+        moreHtmlToAppend += `
+        <div onclick="setProdID(${product.id})"  style="width: 30%" class="col-md-4 mx-3 list-group-item-action border rounded-3 cursor-active ">
+            <div class='container'>
+                <img src="${product.image}" alt="${product.name}" class="img-thumbnail p-2" style='border: none;'>
+            </div>
+            <p class='p-1'>${product.name}</p>
+        </div>
+        `;
+    }
+    relatedProds.innerHTML = moreHtmlToAppend;
 };
 
 function showComments(){
