@@ -153,3 +153,26 @@ document.getElementById("enviar").addEventListener("click", ()=>{
         document.getElementById("puntacion").selectedIndex = 0;
     }
 });
+
+document.getElementById("addToCartButton").addEventListener("click",()=>{
+    if(productInfo != undefined){
+        let activeCart = localStorage.getItem("cartList");
+        activeCart = activeCart ? JSON.parse(activeCart): [];
+        let duplicate = activeCart.findIndex(element => element.id == productInfo.id);
+        let newProduct = {id:productInfo.id,
+            image:productInfo.images[0],
+            name:productInfo.name,
+            unitCost:productInfo.cost
+        };
+        if(duplicate === -1){
+            newProduct.count = 1;
+            activeCart = [...activeCart, newProduct];
+        }
+        else{
+            activeCart[duplicate].count = parseInt(activeCart[duplicate].count) + 1;
+            console.log(activeCart[duplicate]);
+        }
+        localStorage.setItem("cartList",JSON.stringify(activeCart));
+        alert("El prodcuto ha sido agregado a tu carrito!");
+    }
+});
