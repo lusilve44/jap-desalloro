@@ -162,7 +162,8 @@ document.getElementById("addToCartButton").addEventListener("click",()=>{
         let newProduct = {id:productInfo.id,
             image:productInfo.images[0],
             name:productInfo.name,
-            unitCost:productInfo.cost
+            unitCost:productInfo.cost,
+            currency:productInfo.currency
         };
         if(duplicate === -1){
             newProduct.count = 1;
