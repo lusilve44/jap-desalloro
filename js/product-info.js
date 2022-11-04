@@ -1,6 +1,11 @@
 let productInfo;
 let productComments;
 
+// Para establecer el carrito
+let user_id = 25801;
+let url = CART_INFO_URL + `${user_id}` + EXT_TYPE
+let firstProduct;
+
 navbarConfig();
 
 function setProdID(id) {
@@ -104,11 +109,12 @@ function showComments(){
     comments.innerHTML = htmlContentToAppend;
 };
 
+
+// Mostrar info del producto
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL + `${localStorage.getItem('prodID')}` + EXT_TYPE).then(function(resultObj){
         if (resultObj.status === "ok"){
             productInfo = resultObj.data;
-            console.log(productInfo);
             showImages();
             showProductInfo();
         }
@@ -123,19 +129,19 @@ document.addEventListener("DOMContentLoaded", function(e){
                     let dateB = new Date(b.dateTime);
                     return dateB - dateA
                 });
-                console.log(productComments);
                 localStorage.setItem('comments of ' + `${localStorage.getItem('prodID')}`,JSON.stringify(productComments));
                 showComments();
             }
         });
     } else{
         productComments = JSON.parse(localStorage.getItem('comments of ' + `${localStorage.getItem('prodID')}`));
-        console.log(productComments);
         showComments();
     }
 
 });
 
+
+// Envio comentarios
 document.getElementById("enviar").addEventListener("click", ()=>{
     if ((document.getElementById("opinion").value != '') & (document.getElementById("puntacion").selectedIndex != 0)){
         let fecha = new Date(Date.now());
@@ -154,25 +160,34 @@ document.getElementById("enviar").addEventListener("click", ()=>{
     }
 });
 
+
+// Carrito
+document.addEventListener("DOMContentLoaded", function(){
+    getJSONData(url).then(result =>{
+        firstProduct = result.data.articles;
+        console.log(firstProduct);
+    })
+})
+
 document.getElementById("addToCartButton").addEventListener("click",()=>{
     if(productInfo != undefined){
-        let activeCart = localStorage.getItem("cartList");
-        activeCart = activeCart ? JSON.parse(activeCart): [];
+        let activeCart = localStorage.getItem("cartList");    
+        activeCart = activeCart ? JSON.parse(activeCart): firstProduct;
         let duplicate = activeCart.findIndex(element => element.id == productInfo.id);
         let newProduct = {id:productInfo.id,
-            image:productInfo.images[0],
             name:productInfo.name,
+            count:1,
             unitCost:productInfo.cost,
-            currency:productInfo.currency
+            currency:productInfo.currency,
+            image:productInfo.images[0],
         };
         if(duplicate === -1){
-            newProduct.count = 1;
             activeCart = [...activeCart, newProduct];
         }
         else{
             activeCart[duplicate].count = parseInt(activeCart[duplicate].count) + 1;
-            console.log(activeCart[duplicate]);
         }
+        console.log(activeCart);
         localStorage.setItem("cartList",JSON.stringify(activeCart));
         alert("El prodcuto ha sido agregado a tu carrito!");
     }
