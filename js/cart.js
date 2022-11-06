@@ -233,7 +233,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 let checks1 = [street,number,secondStreet,creditCard,securityCode,expirationDate];
                 let result1 = checking(checks1);
                 if (!invalidCounts && result1){
-                    console.log("holi");
                     successful.classList.remove("visually-hidden");
                     setTimeout(()=>{successful.classList.add("visually-hidden")},4000);
                 } else{
