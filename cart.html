@@ -27,7 +27,7 @@
             <th id="unitCost" scope="col">Costo</th>
             <th id="count" scope="col">Cantidad</th>
             <th id="subTotal" scope="col">Subtotal</th>
-            <th id="delete" scope="col">eliminar</th>
+            <th id="delete" scope="col"></th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -47,25 +47,36 @@
           <input class="form-check-input radioShippingMethods" type="radio" name="inlineRadioOptions" id="shippingOption3" value="5">
           <label class="form-check-label" for="inlineRadio3">Standard - 12 a 15 días (5%)</label>
         </div>
+        <br>
         <h3 class="mt-4 mb-2">Dirección de Envío</h3>
         <div class="row">
           <div class="form-group col-md-6">
             <label for="inputCalle">Calle</label>
             <input type="text" class="form-control" id="inputCalle" required>
+            <div class="invalid-feedback">
+              Debe ingresar una calle
+            </div> 
           </div>
           <div class="form-group col-md-6">
             <label for="inputNumero">Número</label>
             <input type="text" class="form-control" id="inputNumero" required>
+            <div class="invalid-feedback">
+              Debe ingresar un número
+            </div> 
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-6">
             <label for="inputEsquina">Esquina</label>
             <input type="text" class="form-control" id="inputEsquina" required>
+            <div class="invalid-feedback">
+              Debe ingresar una esquina
+            </div> 
           </div>
         </div>
         <br>
         <hr class="mb-4">
+        <br>
         <h3 class="mb-3">Costos</h3>
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -87,14 +98,18 @@
             <strong id="totalCostValue">-</strong>
           </li>
         </ul>
+        <br>
         <hr class="mb-4">
         <br>
         <h3 class="mb-3">Forma de pago</h3>
         <div>
           <p id="metodoSeleccionado" class="d-inline">No ha seleccionado</p>
           <button type="button" class="btn btn-link d-inline" data-bs-toggle="modal"
-            data-bs-target="#contidionsModal">
+            data-bs-target="#paymentModal">
             Seleccionar</button>
+          <div class="visually-hidden text-danger" id="div-texto-check">
+            Debe seleccionar una forma de pago
+          </div> 
         </div>
         <br class="mb-5">
         <div class="row">
@@ -114,7 +129,7 @@
     </div>
   </footer>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+  <div class="modal fade" tabindex="-1" role="dialog" id="paymentModal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -122,33 +137,33 @@
         </div>
         <div class="modal-body">
           <div class="container">
-            <input type="radio" id="credito" name="formaPago" form="formCart" required>
+            <input type="radio" id="credito" name="formaPago" form="formCart" class="paymentOptions" required>
             <label for="credito">Tarjeta de crédito</label>
             <hr>
             <div class="row">
               <div class="form-group col-md-6">
                 <label for="inputTarjeta">Número de tarjeta</label>
-                <input type="text" class="form-control" id="inputTarjeta" form="formCart">
+                <input type="text" class="form-control" id="inputTarjeta" form="formCart" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="inputCodigo">Código de seg.</label>
-                <input type="text" class="form-control" id="inputCodigo" form="formCart">
+                <input type="text" class="form-control" id="inputCodigo" form="formCart" required>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md-6">
                 <label for="inputVencimiento">Vencimiento(MM/AA)</label>
-                <input type="text" class="form-control" id="inputVencimiento" form="formCart">
+                <input type="text" class="form-control" id="inputVencimiento" form="formCart" maxlength="5" required>
               </div>
             </div>
             <br>
-            <input type="radio" id="transferencia" name="formaPago" form="formCart">
+            <input type="radio" id="transferencia" name="formaPago" form="formCart" class="paymentOptions">
             <label for="transferencia">Transferencia bancaria</label>
             <hr>
             <div class="row">
               <div class="form-group col-md-6">
                 <label for="inputCuenta">Número de cuenta</label>
-                <input type="text" class="form-control" id="inputCuenta" form="formCart">
+                <input type="text" class="form-control" id="inputCuenta" form="formCart" required>
               </div>
             </div>
           </div>
@@ -158,6 +173,14 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="alert alert-success visually-hidden" id="successful" role="alert">
+    Has completado tu compra con éxito
+  </div>
+
+  <div class="alert alert-danger visually-hidden" id="error" role="alert">
+    Hay información incompleta y/o valores no válidos
   </div>
 
   <div id="spinner-wrapper">
