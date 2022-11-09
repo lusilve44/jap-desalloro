@@ -192,6 +192,8 @@ document.getElementById("addToCartButton").addEventListener("click",()=>{
         }
         console.log(activeCart);
         localStorage.setItem("cartList",JSON.stringify(activeCart));
-        alert("El prodcuto ha sido agregado a tu carrito!");
+        
+        successful.classList.remove("visually-hidden");
+        setTimeout(()=>{successful.classList.add("visually-hidden")},4000);
     }
 });

@@ -12,21 +12,11 @@ let secondName = document.getElementById('userSecondName');
 let secondSurname = document.getElementById('userSecondSurname');
 let displayPfp = document.getElementById('userPfp');
 let profilePicture = document.getElementById('profilePicture');
+let deletePfp = document.getElementById('clearPfp');
+let defaultPfp = "./img/default-profile-icon.jpg";
+let currentPfp;
 let submitBtn = document.getElementById('saveUserData');
 let successful = document.getElementById("successful");
-
-function getBase64Image(img) { //https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
 
 document.addEventListener('DOMContentLoaded', function(){
     firstName.setAttribute('value', userData.firstName);
@@ -37,9 +27,25 @@ document.addEventListener('DOMContentLoaded', function(){
     secondSurname.setAttribute('value', userData.secondSurname);
 
     if (userData.profilePicture != ''){
-        displayPfp.src = userData.profilePicture;
+        currentPfp = userData.profilePicture;
+        displayPfp.setAttribute('src', currentPfp);
     }
     
+    profilePicture.addEventListener('change', function(){
+        const reader = new FileReader();
+        reader.addEventListener('load', function(){
+            currentPfp = reader.result;
+            displayPfp.setAttribute('src', currentPfp);
+        })
+        reader.readAsDataURL(this.files[0]);
+    })
+
+    deletePfp.addEventListener('click', function(){
+        profilePicture.setAttribute('value', null);
+        displayPfp.setAttribute('src', defaultPfp);
+        currentPfp = '';
+    })
+
     submitBtn.addEventListener('click', function(){
         userForm.classList.add('was-validated');
 
@@ -50,8 +56,7 @@ document.addEventListener('DOMContentLoaded', function(){
             userData.contactNumber = contactNumber.value;
             userData.secondName = secondName.value;
             userData.secondSurname = secondSurname.value;
-            userData.profilePicture = getBase64Image(profilePicture);
-            displayPfp.src = userData.profilePicture;
+            userData.profilePicture = currentPfp;
 
             sessionStorage.setItem('currentUser',JSON.stringify(userData));
         
