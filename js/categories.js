@@ -8,6 +8,8 @@ let minCount = undefined;
 let maxCount = undefined;
 
 navbarConfig();
+currentPage("./categories.html");
+checkLoggedUser();
 
 function sortCategories(criteria, array){
     let result = [];

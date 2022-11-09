@@ -81,3 +81,18 @@ let navbarConfig = function(){
     location.href = "./login.html";
   })
 }
+
+function checkLoggedUser(){
+  if (sessionStorage.getItem('status') == 'loggedOut' || sessionStorage.getItem('status') == null) {
+    location.href = "./login.html";
+  }
+}
+
+function currentPage(page){
+  sessionStorage.setItem("currentPage",page);
+}
+
+function validateEmail(email) {
+  return email.match(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+}

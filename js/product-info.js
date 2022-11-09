@@ -1,3 +1,7 @@
+navbarConfig();
+currentPage("./product-info.html");
+checkLoggedUser();
+
 let productInfo;
 let productComments;
 
@@ -5,8 +9,6 @@ let productComments;
 let user_id = 25801;
 let url = CART_INFO_URL + `${user_id}` + EXT_TYPE
 let firstProduct;
-
-navbarConfig();
 
 function setProdID(id) {
     localStorage.setItem("prodID", id);
@@ -173,6 +175,7 @@ document.getElementById("addToCartButton").addEventListener("click",()=>{
     if(productInfo != undefined){
         let activeCart = localStorage.getItem("cartList");    
         activeCart = activeCart ? JSON.parse(activeCart): firstProduct;
+        localStorage.setItem("cartList",activeCart);
         let duplicate = activeCart.findIndex(element => element.id == productInfo.id);
         let newProduct = {id:productInfo.id,
             name:productInfo.name,

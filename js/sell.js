@@ -10,6 +10,8 @@ let PERCENTAGE_SYMBOL = '%';
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
 navbarConfig();
+currentPage("./sell.html");
+checkLoggedUser();
 
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts(){

@@ -1,8 +1,6 @@
 navbarConfig();
-
-if (sessionStorage.getItem('status') == null) {
-    location.href = "./login.html";
-}
+currentPage("./index.html");
+checkLoggedUser();
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {

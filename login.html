@@ -19,14 +19,14 @@
 <body>
   <div style="display: flex;" class="text-center">
     <main class="form-signin" style="margin: auto; padding: 50px">
-      <form onsubmit="event.preventDefault()">
+      <form id="formLogin">
         
         <img class="mb-4" src="img/login.png" alt="" width="300">
         <h1 class="h3">Inicio de sesión</h1>
     
         <div style="margin: 10px;">
           <label>Email</label>
-          <input type="email" class="form-control" id="floatingInput" placeholder="Email"/>
+          <input type="email" class="form-control" id="floatingInput" placeholder="Email" pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' required/>
           <div class="invalid-feedback">
             Ingresa tu e-mail
           </div>
@@ -34,13 +34,13 @@
         
         <div style="margin: 10px;">
           <label>Contraseña</label>
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña"/>
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" minlength=8 required/>
           <div class="invalid-feedback">
             Ingresa tu contraseña
           </div>
         </div>
 
-        <button class="btn btn-lg btn-primary" type="submit" id="ingresar" style="margin: 10px;">Ingresar</button>
+        <button class="btn btn-lg btn-primary" type="button" id="ingresar" style="margin: 10px;">Ingresar</button>
 
       </form>
     </main>

@@ -1,29 +1,31 @@
 let btn = document.getElementById('ingresar');
+let pageTo = sessionStorage.getItem("currentPage");
+let redirectTo = pageTo ? pageTo : "./index.html"
 
 if (sessionStorage.getItem('status') == 'loggedIn') {
-    location.href = "./index.html";
+    location.href = redirectTo;
 }
 
 btn.addEventListener('click', function(event){
-    let email = document.getElementById('floatingInput');
-    let pwrd = document.getElementById('floatingPassword');
-    event.preventDefault();
+    let email = document.getElementById('floatingInput').value;
+    let pwrd = document.getElementById('floatingPassword').value;
+    let form = document.getElementById('formLogin');
 
-    if (email.value.length == 0 && pwrd.value == ''){
-        email.classList.add('is-invalid');
-        pwrd.classList.add('is-invalid');   
-    }
-    else if (email.value != 0 && pwrd.value == 0){
-        pwrd.classList.add('is-invalid');
-        email.classList.remove('is-invalid');
-    }
-    else if (email.value == 0 && pwrd.value != 0){
-        email.classList.add('is-invalid');
-        pwrd.classList.remove('is-invalid');
-    }
-    else {
-        sessionStorage.setItem('currentloggedin_email', email.value);
+    form.classList.add("was-validated");
+
+    if (validateEmail(email) && pwrd.length >= 8) {
+        let user = {
+            email:email,
+            firstName:'',
+            secondName:'',
+            firstSurname:'',
+            secondSurname:'',
+            contactNumber:'',
+            profilePicture:''
+        };
+        sessionStorage.setItem('currentloggedin_email', email);
         sessionStorage.setItem('status','loggedIn');
-        location.href = "./index.html";
+        sessionStorage.setItem('currentUser',JSON.stringify(user));
+        location.href = redirectTo;
     }
 })

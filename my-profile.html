@@ -30,8 +30,66 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1" id="navbar"></nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="container row justify-content-md-center">
+        <div class="col-md-8 order-md-1">
+          <div class="float-end mt-3">
+            <img src="./img/default-profile-icon.jpg" alt="Profile picture" id="userPfp" width="100" height="100">
+          </div>
+          <div class="text-left my-5">
+            <h2>Mi perfil</h2>
+          </div>
+          <form id="userForm">
+            <hr class="mt-5 mb-1 px-2">
+            <div class="container row">
+              <div class="col-6">
+                <div class="mt-2">
+                  <label for="userName">Primer nombre*</label>
+                  <input type="text" class="form-control" id="userName" value="" name="userName" required>
+                  <div class="invalid-feedback">
+                    Ingrese su primer nombre
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <label for="userSurname">Primer apellido*</label>
+                  <input type="text" class="form-control" id="userSurname" value="" name="userSurname" required>
+                  <div class="invalid-feedback">
+                    Ingrese su primer apellido
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <label for="userEmail">E-mail*</label>
+                  <input type="email" class="form-control" id="userEmail" value="" name="userEmail" pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' required>
+                  <div class="invalid-feedback">
+                    Ingrese su e-mail
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <label for="userPhone">Teléfono de contacto*</label>
+                  <input type="text" class="form-control" id="userPhone" value="" name="userPhone" required>
+                  <div class="invalid-feedback">
+                    Ingrese su teléfono de contacto
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mt-2">
+                  <label for="userSecondName">Segundo nombre</label>
+                  <input type="text" class="form-control" id="userSecondName" value="" name="userSecondName">
+                </div>
+                <div class="mt-2">
+                  <label for="userSecondSurname">Segundo apellido</label>
+                  <input type="text" class="form-control" id="userSecondSurname" value="" name="userSecondSurname">
+                </div>
+                <div class="mt-2">
+                  <label for="profilePicture">Imagen de perfil</label>
+                  <input type="file" accept=".jpg,.jpeg,.png" class="form-control" id="profilePicture" value="" name="profilePicture">
+                </div>
+              </div>
+            </div>
+            <hr class="my-3">
+            <button class="btn btn-primary" type="button" id="saveUserData">Guardar cambios</button>
+          </form>
+        </div>
       </div>
     </div>
   </main>
@@ -45,6 +103,11 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="alert alert-success visually-hidden" id="successful" role="alert">
+    Tus datos han sido guardados
+  </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>

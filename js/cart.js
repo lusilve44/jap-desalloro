@@ -1,4 +1,6 @@
 navbarConfig();
+currentPage("./cart.html");
+checkLoggedUser();
 
 let user_id = 25801;
 let url = CART_INFO_URL + `${user_id}` + EXT_TYPE
@@ -57,7 +59,7 @@ function subtotalValues(valuesForEach){
 
 document.addEventListener("DOMContentLoaded", function(){
     getJSONData(url).then(result =>{
-        activeCart = JSON.parse(localStorage.getItem("cartList"));
+        let activeCart = JSON.parse(localStorage.getItem("cartList"));
         let cartList = [];
         if(activeCart == null || activeCart == []){
             cartList = result.data.articles;
@@ -65,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function(){
         else{
             cartList = activeCart;
         }
+        localStorage.setItem("cartList",JSON.stringify(cartList));
         function addRefresh(){
             cartList.forEach((elem,i)=>{
                 let {id,image,name,unitCost,count,currency} = elem;

@@ -8,6 +8,8 @@ let minPrice = undefined;
 let maxPrice = undefined;
 
 navbarConfig();
+currentPage("./products.html");
+checkLoggedUser();
 
 function sortProducts(criteria, array){
     let result = [];
